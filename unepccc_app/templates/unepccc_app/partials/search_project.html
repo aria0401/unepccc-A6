@@ -1,0 +1,10 @@
+<form>
+    {% csrf_token %}
+    <input type="text"
+           hx-post="{% url 'unepccc_app:search-project'  methodology.id %}"
+           hx-target="#project-wrapper"
+           hx-trigger="keyup changed delay:500ms"
+           name="search"
+           class="form-control-sm"
+           placeholder="Search project"/>
+</form>

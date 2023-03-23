@@ -1,0 +1,31 @@
+{% extends 'unepccc_app/base.html' %}
+{% load static %}
+{% block title %}Projects{% endblock title %}
+{% block content %}
+<div class="container mt-5 pt-4 mb-10">
+    <div class="section-header col-lg-8 p-0 mb-5">
+        <h1 class="mb-3">Projects</h1>
+        {% lorem %}
+    </div>
+    <div class="row pt-5">
+        <div class="col-lg-4 pr-lg-5">
+            <div class="filters-header mb-3 d-flex align-items-center">
+                <p class="m-0 mx-2">Filters</p>
+                <img class="filters-icon" src="{% static 'unepccc_app/images/filters-white.svg' %}" />
+            </div>
+            <form class="filters-form" hx-get="{% url 'unepccc_app:project-view' %}" hx-target="#project-wrapper">
+                {{ form.as_p}}
+                <button class="project-btn-submit w-100 mt-3">Submit</button>
+            </form>
+            <div class="my-5">
+                <a class="tx-btn clear-filter-btn d-none" href="{% url 'unepccc_app:project-view' %}">Clear filters</a>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="project-wrapper" id="project-wrapper">
+                {% include 'unepccc_app/partials/project_list.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

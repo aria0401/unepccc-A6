@@ -1,0 +1,26 @@
+[run]
+omit =
+    manage.py
+    */__init__.py
+    */migrations/*.py
+    unepccc_project/asgi.py
+    unepccc_project/wsgi.py
+    unepccc_project/settings.py
+
+[report]
+omit =
+    manage.py
+    */__init__.py
+    */migrations/*.py
+    unepccc_project/asgi.py
+    unepccc_project/wsgi.py
+    unepccc_project/settings.py
+
+exclude_lines =
+    # Exclude debug only code
+    def __repr__
+    if self\.debug
+
+    # Don't complain about not reaching defensive assertions
+    raise AssertionError
+    raise NotImplementedError

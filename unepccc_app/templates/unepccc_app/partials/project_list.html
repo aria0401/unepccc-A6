@@ -1,0 +1,14 @@
+{% if projects %}
+{% for project in projects %}
+{% include 'unepccc_app/partials/project_item.html' %}
+{% endfor %}
+{% elif methodology.projects %}
+{% for project in methodology.projects %}
+{% include 'unepccc_app/partials/project_item.html' %}
+{% endfor %}
+{% else %}
+<h4>{{ message }}</h4>
+{% if template_url %}
+<a class="tx-btn" href="{% url 'unepccc_app:project-view' %}">Clear filters</a>
+{% endif %}
+{% endif %}

@@ -1,0 +1,82 @@
+{% extends 'unepccc_app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="hero-banner">
+    <div class="container hero-text d-flex align-items-center">
+        <h1 class="col-md-6 pl-0 pr-lg-5 hero-heading">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate
+            velit.
+        </h1>
+    </div>
+    <div class="hero-image">
+        <img src="{% static 'unepccc_app/images/splash-image.jpg' %}" />
+    </div>
+</div>
+<div class="cta-wrapper container my-lg-5 py-4 py-lg-5">
+    <div class="cta-row my-5">
+        <a class="cta-a" href="{% url 'unepccc_app:project-view' %}">
+            <div class="cta-item p-4">
+                <img class="mb-3" src="{% static 'unepccc_app/images/projects-icon.svg' %}" />
+                <h5 class="mb-3">Projects</h5>
+                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+                    consectetur
+                    adipiscing elit.</p>
+                <button class="cta-btn mb-3">Read more</button>
+            </div>
+        </a>
+        <a class="cta-a" href="{% url 'unepccc_app:methodology-view' %}">
+            <div class="cta-item p-4">
+                <img class="mb-3" src="{% static 'unepccc_app/images/methodology-icon.svg' %}" />
+                <h5 class="mb-3">Methodologies</h5>
+                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+                    consectetur
+                    adipiscing elit.</p>
+                <button class="cta-btn mb-3">Read more</button>
+            </div>
+        </a>
+        <a class="cta-a" href="{% url 'unepccc_app:projects-by-region-view' %}">
+            <div class="cta-item p-4">
+                <img class="mb-3" src="{% static 'unepccc_app/images/analysis-icon.svg' %}" />
+                <h5 class="mb-3">Analysis</h5>
+                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,
+                    consectetur
+                    adipiscing elit.</p>
+                <button class="cta-btn mb-3">Read more</button>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="about-wrapper mt-lg-5 py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h4 class="home-about-header pr-lg-5 mb-4"><strong>Lorem ipsum</strong> dolor sit amet, consectetur
+                    adipisicing elit,
+                    sed do eiusmod tempor
+                    incididunt ut labore et
+                    dolore magna aliqua. </h4>
+            </div>
+            <div class="col-lg-6">
+                <p>{% lorem %}</p>
+                <p>{% lorem %}</p>
+                <p>{% lorem %}</p>
+                <hr class="mt-5">
+                <div class="contact-info row align-items-center my-4 py-2">
+                    <div class="contact-img col-4 col-md-3">
+                        <img class="rounded-circle"
+                            src="https://unepccc.org/wp-content/uploads/2018/10/karen-cropped-300x300.jpg">
+                    </div>
+                    <div class="info col-8 col-md-9">
+                        <p class="mb-1">Karen Holm Olsen</p>
+                        <p class="mb-1">Senior Researcher</p>
+                        <p class="mb-1">Email: <a class="contact-a"
+                                href="mailto:karen.olsen@un.org">karen.olsen@un.org</a></p>
+                        <p class="mb-1">Tel.: <a class="contact-a" href="tel:+45 4533 5295">+45 4533 5295</a></p>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

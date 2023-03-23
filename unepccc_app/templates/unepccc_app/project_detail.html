@@ -1,0 +1,54 @@
+{% extends 'unepccc_app/base.html' %}
+{% block title %}
+Project details
+{% endblock title %}
+{% block content %}
+<div class="container mt-5 pt-4 mb-10">
+    <div>
+        <p><strong>Project ID:</strong> {{ project.project_id }}</p>
+    </div>
+    <div>
+        <p><strong>Name:</strong> {{ project.name }}</p>
+    </div>
+    <div>
+        <p><strong>Methodology:</strong> {{ project.methodology.name }}</p>
+    </div>
+    <div>
+        <p><strong>Sector:</strong> {{ project.methodology.sector.name }}</p>
+    </div>
+    <div>
+        <p><strong>Host country:</strong> {{ project.country }}</p>
+    </div>
+    <div>
+        <p><strong>Status:</strong> {{ project.status }}</p>
+    </div>
+    <div>
+        <p><strong>Type:</strong> {{ project.sub_type.type }}</p>
+    </div>
+    <div>
+        <p><strong>Subtype:</strong> {{ project.sub_type }}</p>
+    </div>
+    <div>
+        <p><strong>Expected CERs 2025:</strong> {{ project.expected_CERs }}</p>
+    </div>
+    <div>
+        <p><strong>Credit start:</strong> {{ project.credit_start }}</p>
+    </div>
+    <div>
+        <p><strong>Total CERs issued:</strong> {{ total_credits }}</p>
+    </div>
+    <div>
+        <p><strong>Issuances:</strong></p>
+
+        {% if credits %}
+        {% for credit in credits %}
+        <p>
+            {{ credit.credit }} - {{ credit.date }}
+        </p>
+        {% endfor %}
+        {% else %}
+        No credits in this project
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

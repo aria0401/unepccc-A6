@@ -1,0 +1,13 @@
+*.swp
+.DS_Store
+*.pyc
+__pycache__/
+db.sqlite3
+.coverage
+*.env
+db_prod.env
+db_test.env
+db_dev.env
+certs/
+nginx/
+data.json

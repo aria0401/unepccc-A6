@@ -1,0 +1,63 @@
+stages:
+  - static
+  - build
+  - deploy
+  
+static:
+  stage: static
+  image: python:3.10-alpine
+  before_script:
+    - pip install -r sqa-requirements.txt
+    - apk update && apk add shellcheck
+  script:
+    - pylama .
+    - djlint .
+    - pip-audit
+    - yamllint *.yml
+    - shellcheck *.sh
+  tags:
+    - vps
+  only:
+    refs:
+      - master
+
+
+build:
+  stage: build
+  image: registry.gitlab.com/suppmen/composer:latest
+  services:
+    - docker:dind # dind is docker in docker
+  variables:
+    DOCKER_DRIVER: overlay2 # this supposedly make it run faster
+  before_script: # ”$CI_REGISTRY” is image above with registry
+    - docker login -u gitlab-ci-token -p "$GITLAB_CI_TOKEN" "$CI_REGISTRY"
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/unepcapp:latest" .
+    - echo "$test_env" > db_test.env
+    - RTE=test docker-compose up --abort-on-container-exit --exit-code-from app
+    - docker push "$CI_REGISTRY_IMAGE/unepcapp:latest"
+  when: manual
+  only:
+    refs:
+      - master
+
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )' 
+    - eval $(ssh-agent -s)
+    - echo "$SSH_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $HOST_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh $USER@$HOST_IP "/bin/bash deploy.sh"
+  tags:
+    - vps
+  when: manual
+  only:
+    refs:
+      - master

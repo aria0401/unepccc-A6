@@ -1,0 +1,24 @@
+{% extends 'unepccc_app/base.html' %}
+{% block title %}Methodology details{% endblock title %}
+{% block content %}
+<div class="container mt-5 pt-4 mb-10">
+    <div class="col-lg-10 p-0">
+        <h4>{{ methodology.name }}</h4>
+        <p>ID: {{ methodology }}</p>
+        <p>Sector: {{ methodology.sector }}</p>
+        <p class="my-5">{{ methodology.description }}</p>
+    </div>
+    <div class="">
+        <div class="col-lg-10 p-0">
+            {% if methodology.project_count > 0 %}
+            {% include 'unepccc_app/partials/search_project.html' %}
+            {% else %}
+            <h4>No projects are using this methodology.</h4>
+            {% endif %}
+            <div class="project-wrapper my-5" id="project-wrapper">
+                {% include 'unepccc_app/partials/project_list.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

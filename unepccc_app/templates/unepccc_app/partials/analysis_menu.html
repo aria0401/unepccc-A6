@@ -1,0 +1,11 @@
+{% load extra_tags %}
+
+<ul class="list-unstyled pr-5">
+    <li class="analysis-nav-li {% activate_on 'projects-by-region-view' %}"><a
+            href="{% url 'unepccc_app:projects-by-region-view' %}">Projects by Region</a></li>
+    <li class="analysis-nav-li {% activate_on 'projects-by-methodology-view' %}"><a
+            href="{% url 'unepccc_app:projects-by-methodology-view' %}">Projects by Methodology
+            and Status</a></li>
+    <li class="analysis-nav-li {% activate_on 'credits-by-sector-view' %}"><a
+            href="{% url 'unepccc_app:credits-by-sector-view' %}">CERs by Sector</a></li>
+</ul>

@@ -1,0 +1,24 @@
+<a class="my-3 project-card-wrapper" href="{% url 'unepccc_app:project-details' project.id %}">
+    <div class="project-card mb-5 p-4">
+        <h5 class="name mb-4">{{ project.name }}</h5>
+        <div class="row">
+            <div class="col-md-4">
+                <p><span>ID:</span> {{ project.project_id }} </p>
+                <p><span>Status:</span> {{ project.status }} </p>
+                <p><span>Methodology:</span> {{ project.methodology }} </p>
+            </div>
+            <div class="col-md-4">
+                <p><span>Region:</span> {{project.country.sub_region.region}}</p>
+                <p><span>Country:</span> {{project.country}}</p>
+                <p><span>Validator:</span> {{project.validator.short_name}}</p>
+            </div>
+            <div class="col-md-4">
+                <p><span>Type:</span> {{project.sub_type.type}}</p>
+                <p><span>Sub-type:</span> {{project.sub_type}}</p>
+                <p><span>kCERs:</span> {% if project.credits is None %} 0 {% else %} {{project.credits}}
+                    {% endif %}</p>
+            </div>
+        </div>
+        <p class="tx-btn">See project details</p>
+    </div>
+</a>

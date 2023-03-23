@@ -1,0 +1,19 @@
+<div class="mb-5 pb-2 methodology-item">
+    <h3 class="m-0 methodology-header">{{ sector.name }}</h3>
+    <span>Number of projects: {{sector.project_count}}</span>
+    {% if sector.methodologies %}
+    <ul class="list-unstyled mt-4">
+        {% for methodology in sector.methodologies %}
+        <li class="pl-3 method-row">
+            <a class="" href="{% url 'unepccc_app:methodology-details' methodology.id %}">
+                <p class="m-0">{{methodology.methodology_id}}</p>
+                <p class="m-0 pr-lg-5">{{methodology.name}}</p>
+                <p class="m-0">Projects: {{methodology.project_count}}</p>
+                <p class="m-0">kCERs: {% if methodology.credits is None %} 0 {% else %} {{methodology.credits}}
+                    {% endif %}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>

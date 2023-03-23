@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres:14-alpine
+    volumes:
+      - unepccc_postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - db_${RTE}.env
+    networks:
+      - dbnet
+
+  app:
+    image: registry.gitlab.com/aria0401/unepccc/unepcapp:latest
+    ports:
+      - 8000:8000
+      - 8080:8080
+    env_file:
+      - db_${RTE}.env
+    volumes:
+      - .:/app/  # mount current directory as dynamic mapping / bind mount
+      - media:/media/
+      - static:/static/
+    depends_on:
+      - db
+    networks:
+      - dbnet
+      - webnet
+
+  nginx:
+    build: nginx/
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    env_file:
+      - db_${RTE}.env
+    volumes:
+      - ./nginx/${RTE}/conf.d/:/etc/nginx/conf.d/
+      - ./certs/:/etc/letsencrypt/
+      - static:/static/
+      - media:/media/
+    depends_on:
+      - app
+    networks:
+      - webnet
+
+volumes:
+  unepccc_postgres_data:
+  media:
+  static:
+
+networks:
+  webnet:
+    driver: bridge
+  dbnet:
+    driver: bridge

@@ -1,0 +1,38 @@
+{% extends 'unepccc_app/base.html' %}
+{% block title %} Analysis {% endblock title %}
+{% block content %}
+<div class="container mt-5 pt-4">
+    <h1>Analysis</h1>
+    <div class="row my-5">
+        <div class="col-lg-4">
+            {% include 'unepccc_app/partials/analysis_menu.html' %}
+        </div>
+        <div class="col-lg-8 plot-wrapper">
+            <div class="input-select-items mb-4 d-flex justify-content-end">
+                <div class="col-md-6 d-flex flex-column pl-0">
+                    <label for="select-status">Select status</label>
+                    <select id="select-status" class="" name="status"
+                        hx-get="{% url 'unepccc_app:projects-by-methodology-view' %}" hx-target="#barchart"
+                        hx-trigger="change" hx-vals="js:{count: document.querySelector('#count').value }">
+                        {% for s in status %}
+                        {% if s.project_count > 0 %}
+                        <option value="{{ s.id }}" {% if status_selected == s.id  %} selected{% endif %}>
+                            {{ s.name }}
+                        </option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-6 d-flex flex-column pr-0">
+                    <label for="count">Number of columns</label>
+                    <input type="number" name="count" id="count" autocomplete="off" value="{{ count }}"
+                        hx-get="{% url 'unepccc_app:projects-by-methodology-view' %}" hx-target="#barchart"
+                        hx-trigger="keyup changed delay:300ms"
+                        hx-vals="js:{status: document.querySelector('#select-status').value }" />
+                </div>
+            </div>
+            <div id="barchart" class="mb-5">{% include 'unepccc_app/partials/bar_chart.html' %}</div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

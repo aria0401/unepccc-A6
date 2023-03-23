@@ -1,0 +1,5 @@
+pylama
+djlint
+pip-audit
+yamllint
+setuptools==65.5.1

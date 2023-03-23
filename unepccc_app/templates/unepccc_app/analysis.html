@@ -1,0 +1,15 @@
+{% extends 'unepccc_app/base.html' %}
+{% block title %} Analysis {% endblock title %}
+{% block content %}
+<div class="container mt-5 pt-4">
+    <h1>Analysis</h1>
+    <div class="row my-5">
+        <div class="col-lg-4">
+            {% include 'unepccc_app/partials/analysis_menu.html' %}
+        </div>
+        <div class="col-lg-8 plot-wrapper">
+            <div id="barchart">{% include 'unepccc_app/partials/bar_chart.html' %}</div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
